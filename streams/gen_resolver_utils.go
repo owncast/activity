@@ -73,16 +73,10 @@ func ToType(c context.Context, m map[string]interface{}) (t vocab.Type, err erro
 	}, func(ctx context.Context, i vocab.ActivityStreamsBlock) error {
 		t = i
 		return nil
-	}, func(ctx context.Context, i vocab.ForgeFedBranch) error {
-		t = i
-		return nil
 	}, func(ctx context.Context, i vocab.ActivityStreamsCollection) error {
 		t = i
 		return nil
 	}, func(ctx context.Context, i vocab.ActivityStreamsCollectionPage) error {
-		t = i
-		return nil
-	}, func(ctx context.Context, i vocab.ForgeFedCommit) error {
 		t = i
 		return nil
 	}, func(ctx context.Context, i vocab.ActivityStreamsCreate) error {
@@ -110,6 +104,9 @@ func ToType(c context.Context, m map[string]interface{}) (t vocab.Type, err erro
 		t = i
 		return nil
 	}, func(ctx context.Context, i vocab.ActivityStreamsGroup) error {
+		t = i
+		return nil
+	}, func(ctx context.Context, i vocab.TootHashtag) error {
 		t = i
 		return nil
 	}, func(ctx context.Context, i vocab.TootIdentityProof) error {
@@ -181,9 +178,6 @@ func ToType(c context.Context, m map[string]interface{}) (t vocab.Type, err erro
 	}, func(ctx context.Context, i vocab.W3IDSecurityV1PublicKey) error {
 		t = i
 		return nil
-	}, func(ctx context.Context, i vocab.ForgeFedPush) error {
-		t = i
-		return nil
 	}, func(ctx context.Context, i vocab.ActivityStreamsQuestion) error {
 		t = i
 		return nil
@@ -199,9 +193,6 @@ func ToType(c context.Context, m map[string]interface{}) (t vocab.Type, err erro
 	}, func(ctx context.Context, i vocab.ActivityStreamsRemove) error {
 		t = i
 		return nil
-	}, func(ctx context.Context, i vocab.ForgeFedRepository) error {
-		t = i
-		return nil
 	}, func(ctx context.Context, i vocab.ActivityStreamsService) error {
 		t = i
 		return nil
@@ -209,12 +200,6 @@ func ToType(c context.Context, m map[string]interface{}) (t vocab.Type, err erro
 		t = i
 		return nil
 	}, func(ctx context.Context, i vocab.ActivityStreamsTentativeReject) error {
-		t = i
-		return nil
-	}, func(ctx context.Context, i vocab.ForgeFedTicket) error {
-		t = i
-		return nil
-	}, func(ctx context.Context, i vocab.ForgeFedTicketDependency) error {
 		t = i
 		return nil
 	}, func(ctx context.Context, i vocab.ActivityStreamsTombstone) error {
