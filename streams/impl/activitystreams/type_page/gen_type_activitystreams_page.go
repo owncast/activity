@@ -42,6 +42,7 @@ type ActivityStreamsPage struct {
 	ActivityStreamsPreview      vocab.ActivityStreamsPreviewProperty
 	ActivityStreamsPublished    vocab.ActivityStreamsPublishedProperty
 	ActivityStreamsReplies      vocab.ActivityStreamsRepliesProperty
+	ActivityStreamsSensitive    vocab.ActivityStreamsSensitiveProperty
 	ActivityStreamsShares       vocab.ActivityStreamsSharesProperty
 	ActivityStreamsSource       vocab.ActivityStreamsSourceProperty
 	ActivityStreamsStartTime    vocab.ActivityStreamsStartTimeProperty
@@ -229,6 +230,11 @@ func DeserializePage(m map[string]interface{}, aliasMap map[string]string) (*Act
 	} else if p != nil {
 		this.ActivityStreamsReplies = p
 	}
+	if p, err := mgr.DeserializeSensitivePropertyActivityStreams()(m, aliasMap); err != nil {
+		return nil, err
+	} else if p != nil {
+		this.ActivityStreamsSensitive = p
+	}
 	if p, err := mgr.DeserializeSharesPropertyActivityStreams()(m, aliasMap); err != nil {
 		return nil, err
 	} else if p != nil {
@@ -332,6 +338,8 @@ func DeserializePage(m map[string]interface{}, aliasMap map[string]string) (*Act
 		} else if k == "published" {
 			continue
 		} else if k == "replies" {
+			continue
+		} else if k == "sensitive" {
 			continue
 		} else if k == "shares" {
 			continue
@@ -539,6 +547,12 @@ func (this ActivityStreamsPage) GetActivityStreamsReplies() vocab.ActivityStream
 	return this.ActivityStreamsReplies
 }
 
+// GetActivityStreamsSensitive returns the "sensitive" property if it exists, and
+// nil otherwise.
+func (this ActivityStreamsPage) GetActivityStreamsSensitive() vocab.ActivityStreamsSensitiveProperty {
+	return this.ActivityStreamsSensitive
+}
+
 // GetActivityStreamsShares returns the "shares" property if it exists, and nil
 // otherwise.
 func (this ActivityStreamsPage) GetActivityStreamsShares() vocab.ActivityStreamsSharesProperty {
@@ -651,6 +665,7 @@ func (this ActivityStreamsPage) JSONLDContext() map[string]string {
 	m = this.helperJSONLDContext(this.ActivityStreamsPreview, m)
 	m = this.helperJSONLDContext(this.ActivityStreamsPublished, m)
 	m = this.helperJSONLDContext(this.ActivityStreamsReplies, m)
+	m = this.helperJSONLDContext(this.ActivityStreamsSensitive, m)
 	m = this.helperJSONLDContext(this.ActivityStreamsShares, m)
 	m = this.helperJSONLDContext(this.ActivityStreamsSource, m)
 	m = this.helperJSONLDContext(this.ActivityStreamsStartTime, m)
@@ -1018,6 +1033,20 @@ func (this ActivityStreamsPage) LessThan(o vocab.ActivityStreamsPage) bool {
 		// Anything else is greater than nil
 		return false
 	} // Else: Both are nil
+	// Compare property "sensitive"
+	if lhs, rhs := this.ActivityStreamsSensitive, o.GetActivityStreamsSensitive(); lhs != nil && rhs != nil {
+		if lhs.LessThan(rhs) {
+			return true
+		} else if rhs.LessThan(lhs) {
+			return false
+		}
+	} else if lhs == nil && rhs != nil {
+		// Nil is less than anything else
+		return true
+	} else if rhs != nil && rhs == nil {
+		// Anything else is greater than nil
+		return false
+	} // Else: Both are nil
 	// Compare property "shares"
 	if lhs, rhs := this.ActivityStreamsShares, o.GetActivityStreamsShares(); lhs != nil && rhs != nil {
 		if lhs.LessThan(rhs) {
@@ -1367,6 +1396,14 @@ func (this ActivityStreamsPage) Serialize() (map[string]interface{}, error) {
 			m[this.ActivityStreamsReplies.Name()] = i
 		}
 	}
+	// Maybe serialize property "sensitive"
+	if this.ActivityStreamsSensitive != nil {
+		if i, err := this.ActivityStreamsSensitive.Serialize(); err != nil {
+			return nil, err
+		} else if i != nil {
+			m[this.ActivityStreamsSensitive.Name()] = i
+		}
+	}
 	// Maybe serialize property "shares"
 	if this.ActivityStreamsShares != nil {
 		if i, err := this.ActivityStreamsShares.Serialize(); err != nil {
@@ -1566,6 +1603,11 @@ func (this *ActivityStreamsPage) SetActivityStreamsPublished(i vocab.ActivityStr
 // SetActivityStreamsReplies sets the "replies" property.
 func (this *ActivityStreamsPage) SetActivityStreamsReplies(i vocab.ActivityStreamsRepliesProperty) {
 	this.ActivityStreamsReplies = i
+}
+
+// SetActivityStreamsSensitive sets the "sensitive" property.
+func (this *ActivityStreamsPage) SetActivityStreamsSensitive(i vocab.ActivityStreamsSensitiveProperty) {
+	this.ActivityStreamsSensitive = i
 }
 
 // SetActivityStreamsShares sets the "shares" property.

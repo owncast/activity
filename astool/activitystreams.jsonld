@@ -4259,13 +4259,19 @@
             "id": "https://www.w3.org/TR/activitypub/#source-property",
             "type": "http://schema.org/CreativeWork",
             "mainEntity": {
-              "@context": ["https://www.w3.org/ns/activitystreams", {"@language": "en"}],
+              "@context": [
+                "https://www.w3.org/ns/activitystreams",
+                {
+                  "@language": "en"
+                }
+              ],
               "type": "Note",
               "id": "http://postparty.example/p/2415",
               "content": "<p>I <em>really</em> like strawberries!</p>",
               "source": {
                 "content": "I *really* like strawberries!",
-                "mediaType": "text/markdown"}
+                "mediaType": "text/markdown"
+              }
             },
             "name": "Example 8"
           },
@@ -4871,6 +4877,29 @@
           "url": "https://www.w3.org/TR/activitystreams-vocabulary/#dfn-deleted"
         },
         {
+          "id": "https://www.w3.org/ns/activitystreams#sensitive",
+          "type": [
+            "rdf:Property",
+            "owl:ObjectProperty"
+          ],
+          "notes": "Indicates that some users may wish to apply discretion about viewing this object's content, whether due to nudity, violence, or any other likely aspects that viewers may be sensitive to.",
+          "domain": {
+            "type": "owl:Class",
+            "unionOf": {
+              "type": "owl:Class",
+              "url": "https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object",
+              "name": "Object"
+            }
+          },
+          "isDefinedBy": "https://www.w3.org/TR/activitystreams-vocabulary/#sensitive",
+          "range": {
+            "type": "owl:Class",
+            "unionOf": "xsd:boolean"
+          },
+          "name": "sensitive",
+          "url": "https://www.w3.org/TR/activitystreams-vocabulary/#sensitive"
+        },
+        {
           "id": "https://www.w3.org/TR/activitypub/#inbox",
           "type": [
             "rdf:Property",
@@ -4880,7 +4909,12 @@
             "id": "https://www.w3.org/TR/activitypub/#example9",
             "type": "http://schema.org/CreativeWork",
             "mainEntity": {
-              "@context": ["https://www.w3.org/ns/activitystreams", {"@language": "ja"}],
+              "@context": [
+                "https://www.w3.org/ns/activitystreams",
+                {
+                  "@language": "ja"
+                }
+              ],
               "type": "Person",
               "id": "https://kenzoishii.example.com/",
               "following": "https://kenzoishii.example.com/following.json",
@@ -4891,7 +4925,9 @@
               "preferredUsername": "kenzoishii",
               "name": "石井健蔵",
               "summary": "この方はただの例です",
-              "icon": ["https://kenzoishii.example.com/image/165987aklre4"]
+              "icon": [
+                "https://kenzoishii.example.com/image/165987aklre4"
+              ]
             },
             "name": "Example 9"
           },
@@ -4948,7 +4984,12 @@
             "id": "https://www.w3.org/TR/activitypub/#example9",
             "type": "http://schema.org/CreativeWork",
             "mainEntity": {
-              "@context": ["https://www.w3.org/ns/activitystreams", {"@language": "ja"}],
+              "@context": [
+                "https://www.w3.org/ns/activitystreams",
+                {
+                  "@language": "ja"
+                }
+              ],
               "type": "Person",
               "id": "https://kenzoishii.example.com/",
               "following": "https://kenzoishii.example.com/following.json",
@@ -4959,7 +5000,9 @@
               "preferredUsername": "kenzoishii",
               "name": "石井健蔵",
               "summary": "この方はただの例です",
-              "icon": ["https://kenzoishii.example.com/image/165987aklre4"]
+              "icon": [
+                "https://kenzoishii.example.com/image/165987aklre4"
+              ]
             },
             "name": "Example 9"
           },
@@ -5016,7 +5059,12 @@
             "id": "https://www.w3.org/TR/activitypub/#example9",
             "type": "http://schema.org/CreativeWork",
             "mainEntity": {
-              "@context": ["https://www.w3.org/ns/activitystreams", {"@language": "ja"}],
+              "@context": [
+                "https://www.w3.org/ns/activitystreams",
+                {
+                  "@language": "ja"
+                }
+              ],
               "type": "Person",
               "id": "https://kenzoishii.example.com/",
               "following": "https://kenzoishii.example.com/following.json",
@@ -5027,7 +5075,9 @@
               "preferredUsername": "kenzoishii",
               "name": "石井健蔵",
               "summary": "この方はただの例です",
-              "icon": ["https://kenzoishii.example.com/image/165987aklre4"]
+              "icon": [
+                "https://kenzoishii.example.com/image/165987aklre4"
+              ]
             },
             "name": "Example 9"
           },
@@ -5091,7 +5141,12 @@
             "id": "https://www.w3.org/TR/activitypub/#example9",
             "type": "http://schema.org/CreativeWork",
             "mainEntity": {
-              "@context": ["https://www.w3.org/ns/activitystreams", {"@language": "ja"}],
+              "@context": [
+                "https://www.w3.org/ns/activitystreams",
+                {
+                  "@language": "ja"
+                }
+              ],
               "type": "Person",
               "id": "https://kenzoishii.example.com/",
               "following": "https://kenzoishii.example.com/following.json",
@@ -5102,7 +5157,9 @@
               "preferredUsername": "kenzoishii",
               "name": "石井健蔵",
               "summary": "この方はただの例です",
-              "icon": ["https://kenzoishii.example.com/image/165987aklre4"]
+              "icon": [
+                "https://kenzoishii.example.com/image/165987aklre4"
+              ]
             },
             "name": "Example 9"
           },
@@ -5166,7 +5223,12 @@
             "id": "https://www.w3.org/TR/activitypub/#example9",
             "type": "http://schema.org/CreativeWork",
             "mainEntity": {
-              "@context": ["https://www.w3.org/ns/activitystreams", {"@language": "ja"}],
+              "@context": [
+                "https://www.w3.org/ns/activitystreams",
+                {
+                  "@language": "ja"
+                }
+              ],
               "type": "Person",
               "id": "https://kenzoishii.example.com/",
               "following": "https://kenzoishii.example.com/following.json",
@@ -5177,7 +5239,9 @@
               "preferredUsername": "kenzoishii",
               "name": "石井健蔵",
               "summary": "この方はただの例です",
-              "icon": ["https://kenzoishii.example.com/image/165987aklre4"]
+              "icon": [
+                "https://kenzoishii.example.com/image/165987aklre4"
+              ]
             },
             "name": "Example 9"
           },
