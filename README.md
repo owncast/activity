@@ -79,6 +79,12 @@ Please see each subdirectory for its own README for further elaboration.
 
 Please see the CONTRIBUTING.md file!
 
+### owncast specific codegen instructions
+Execute the following to generate the vocab needed for owncast.
+```
+go run ./astool -spec astool/activitystreams.jsonld --spec astool/security-v1.jsonld -spec astool/toot.jsonld -path github.com/go-fed/activity ./streams
+```
+
 ### Useful References
 
 * [ActivityPub Specification](https://www.w3.org/TR/activitypub)
