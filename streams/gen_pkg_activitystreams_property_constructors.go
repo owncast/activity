@@ -20,6 +20,7 @@ import (
 	propertydeleted "github.com/go-fed/activity/streams/impl/activitystreams/property_deleted"
 	propertydescribes "github.com/go-fed/activity/streams/impl/activitystreams/property_describes"
 	propertyduration "github.com/go-fed/activity/streams/impl/activitystreams/property_duration"
+	propertyendpoints "github.com/go-fed/activity/streams/impl/activitystreams/property_endpoints"
 	propertyendtime "github.com/go-fed/activity/streams/impl/activitystreams/property_endtime"
 	propertyfirst "github.com/go-fed/activity/streams/impl/activitystreams/property_first"
 	propertyfollowers "github.com/go-fed/activity/streams/impl/activitystreams/property_followers"
@@ -61,6 +62,7 @@ import (
 	propertyreplies "github.com/go-fed/activity/streams/impl/activitystreams/property_replies"
 	propertyresult "github.com/go-fed/activity/streams/impl/activitystreams/property_result"
 	propertysensitive "github.com/go-fed/activity/streams/impl/activitystreams/property_sensitive"
+	propertysharedinbox "github.com/go-fed/activity/streams/impl/activitystreams/property_sharedinbox"
 	propertyshares "github.com/go-fed/activity/streams/impl/activitystreams/property_shares"
 	propertysource "github.com/go-fed/activity/streams/impl/activitystreams/property_source"
 	propertystartindex "github.com/go-fed/activity/streams/impl/activitystreams/property_startindex"
@@ -185,6 +187,12 @@ func NewActivityStreamsDurationProperty() vocab.ActivityStreamsDurationProperty 
 // ActivityStreamsEndTimeProperty
 func NewActivityStreamsEndTimeProperty() vocab.ActivityStreamsEndTimeProperty {
 	return propertyendtime.NewActivityStreamsEndTimeProperty()
+}
+
+// NewActivityStreamsActivityStreamsEndpointsProperty creates a new
+// ActivityStreamsEndpointsProperty
+func NewActivityStreamsEndpointsProperty() vocab.ActivityStreamsEndpointsProperty {
+	return propertyendpoints.NewActivityStreamsEndpointsProperty()
 }
 
 // NewActivityStreamsActivityStreamsFirstProperty creates a new
@@ -425,6 +433,12 @@ func NewActivityStreamsResultProperty() vocab.ActivityStreamsResultProperty {
 // ActivityStreamsSensitiveProperty
 func NewActivityStreamsSensitiveProperty() vocab.ActivityStreamsSensitiveProperty {
 	return propertysensitive.NewActivityStreamsSensitiveProperty()
+}
+
+// NewActivityStreamsActivityStreamsSharedInboxProperty creates a new
+// ActivityStreamsSharedInboxProperty
+func NewActivityStreamsSharedInboxProperty() vocab.ActivityStreamsSharedInboxProperty {
+	return propertysharedinbox.NewActivityStreamsSharedInboxProperty()
 }
 
 // NewActivityStreamsActivityStreamsSharesProperty creates a new

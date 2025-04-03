@@ -386,7 +386,7 @@ func NewActivityStreamsNote() *ActivityStreamsNote {
 // NoteIsDisjointWith returns true if the other provided type is disjoint with the
 // Note type.
 func NoteIsDisjointWith(other vocab.Type) bool {
-	disjointWith := []string{"Hashtag", "Link", "Mention"}
+	disjointWith := []string{"EndpointCollection", "Hashtag", "Link", "Mention"}
 	for _, disjoint := range disjointWith {
 		if disjoint == other.GetTypeName() {
 			return true

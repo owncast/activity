@@ -20,6 +20,7 @@ import (
 	propertydeleted "github.com/go-fed/activity/streams/impl/activitystreams/property_deleted"
 	propertydescribes "github.com/go-fed/activity/streams/impl/activitystreams/property_describes"
 	propertyduration "github.com/go-fed/activity/streams/impl/activitystreams/property_duration"
+	propertyendpoints "github.com/go-fed/activity/streams/impl/activitystreams/property_endpoints"
 	propertyendtime "github.com/go-fed/activity/streams/impl/activitystreams/property_endtime"
 	propertyfirst "github.com/go-fed/activity/streams/impl/activitystreams/property_first"
 	propertyfollowers "github.com/go-fed/activity/streams/impl/activitystreams/property_followers"
@@ -61,6 +62,7 @@ import (
 	propertyreplies "github.com/go-fed/activity/streams/impl/activitystreams/property_replies"
 	propertyresult "github.com/go-fed/activity/streams/impl/activitystreams/property_result"
 	propertysensitive "github.com/go-fed/activity/streams/impl/activitystreams/property_sensitive"
+	propertysharedinbox "github.com/go-fed/activity/streams/impl/activitystreams/property_sharedinbox"
 	propertyshares "github.com/go-fed/activity/streams/impl/activitystreams/property_shares"
 	propertysource "github.com/go-fed/activity/streams/impl/activitystreams/property_source"
 	propertystartindex "github.com/go-fed/activity/streams/impl/activitystreams/property_startindex"
@@ -91,6 +93,7 @@ import (
 	typedelete "github.com/go-fed/activity/streams/impl/activitystreams/type_delete"
 	typedislike "github.com/go-fed/activity/streams/impl/activitystreams/type_dislike"
 	typedocument "github.com/go-fed/activity/streams/impl/activitystreams/type_document"
+	typeendpointcollection "github.com/go-fed/activity/streams/impl/activitystreams/type_endpointcollection"
 	typeevent "github.com/go-fed/activity/streams/impl/activitystreams/type_event"
 	typeflag "github.com/go-fed/activity/streams/impl/activitystreams/type_flag"
 	typefollow "github.com/go-fed/activity/streams/impl/activitystreams/type_follow"
@@ -175,6 +178,7 @@ func init() {
 	propertydeleted.SetManager(mgr)
 	propertydescribes.SetManager(mgr)
 	propertyduration.SetManager(mgr)
+	propertyendpoints.SetManager(mgr)
 	propertyendtime.SetManager(mgr)
 	propertyfirst.SetManager(mgr)
 	propertyfollowers.SetManager(mgr)
@@ -216,6 +220,7 @@ func init() {
 	propertyreplies.SetManager(mgr)
 	propertyresult.SetManager(mgr)
 	propertysensitive.SetManager(mgr)
+	propertysharedinbox.SetManager(mgr)
 	propertyshares.SetManager(mgr)
 	propertysource.SetManager(mgr)
 	propertystartindex.SetManager(mgr)
@@ -246,6 +251,7 @@ func init() {
 	typedelete.SetManager(mgr)
 	typedislike.SetManager(mgr)
 	typedocument.SetManager(mgr)
+	typeendpointcollection.SetManager(mgr)
 	typeevent.SetManager(mgr)
 	typeflag.SetManager(mgr)
 	typefollow.SetManager(mgr)
@@ -313,6 +319,7 @@ func init() {
 	typedelete.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typedislike.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typedocument.SetTypePropertyConstructor(NewJSONLDTypeProperty)
+	typeendpointcollection.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typeevent.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typeflag.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typefollow.SetTypePropertyConstructor(NewJSONLDTypeProperty)
