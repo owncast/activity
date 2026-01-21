@@ -18,6 +18,7 @@ import (
 	typedelete "github.com/go-fed/activity/streams/impl/activitystreams/type_delete"
 	typedislike "github.com/go-fed/activity/streams/impl/activitystreams/type_dislike"
 	typedocument "github.com/go-fed/activity/streams/impl/activitystreams/type_document"
+	typeendpointcollection "github.com/go-fed/activity/streams/impl/activitystreams/type_endpointcollection"
 	typeevent "github.com/go-fed/activity/streams/impl/activitystreams/type_event"
 	typeflag "github.com/go-fed/activity/streams/impl/activitystreams/type_flag"
 	typefollow "github.com/go-fed/activity/streams/impl/activitystreams/type_follow"
@@ -148,6 +149,13 @@ func IsOrExtendsActivityStreamsDislike(other vocab.Type) bool {
 // the Document type or extends from the Document type.
 func IsOrExtendsActivityStreamsDocument(other vocab.Type) bool {
 	return typedocument.IsOrExtendsDocument(other)
+}
+
+// IsOrExtendsActivityStreamsEndpointCollection returns true if the other provided
+// type is the EndpointCollection type or extends from the EndpointCollection
+// type.
+func IsOrExtendsActivityStreamsEndpointCollection(other vocab.Type) bool {
+	return typeendpointcollection.IsOrExtendsEndpointCollection(other)
 }
 
 // IsOrExtendsActivityStreamsEvent returns true if the other provided type is the

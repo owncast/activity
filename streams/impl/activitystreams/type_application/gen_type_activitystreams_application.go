@@ -28,6 +28,7 @@ type ActivityStreamsApplication struct {
 	TootDiscoverable                         vocab.TootDiscoverableProperty
 	ActivityStreamsDuration                  vocab.ActivityStreamsDurationProperty
 	ActivityStreamsEndTime                   vocab.ActivityStreamsEndTimeProperty
+	ActivityStreamsEndpoints                 vocab.ActivityStreamsEndpointsProperty
 	TootFeatured                             vocab.TootFeaturedProperty
 	ActivityStreamsFollowers                 vocab.ActivityStreamsFollowersProperty
 	ActivityStreamsFollowing                 vocab.ActivityStreamsFollowingProperty
@@ -80,7 +81,7 @@ func ActivityStreamsApplicationExtends(other vocab.Type) bool {
 // ApplicationIsDisjointWith returns true if the other provided type is disjoint
 // with the Application type.
 func ApplicationIsDisjointWith(other vocab.Type) bool {
-	disjointWith := []string{"Hashtag", "Link", "Mention"}
+	disjointWith := []string{"EndpointCollection", "Hashtag", "Link", "Mention"}
 	for _, disjoint := range disjointWith {
 		if disjoint == other.GetTypeName() {
 			return true
@@ -193,6 +194,11 @@ func DeserializeApplication(m map[string]interface{}, aliasMap map[string]string
 		return nil, err
 	} else if p != nil {
 		this.ActivityStreamsEndTime = p
+	}
+	if p, err := mgr.DeserializeEndpointsPropertyActivityStreams()(m, aliasMap); err != nil {
+		return nil, err
+	} else if p != nil {
+		this.ActivityStreamsEndpoints = p
 	}
 	if p, err := mgr.DeserializeFeaturedPropertyToot()(m, aliasMap); err != nil {
 		return nil, err
@@ -390,6 +396,8 @@ func DeserializeApplication(m map[string]interface{}, aliasMap map[string]string
 			continue
 		} else if k == "endTime" {
 			continue
+		} else if k == "endpoints" {
+			continue
 		} else if k == "featured" {
 			continue
 		} else if k == "followers" {
@@ -554,6 +562,12 @@ func (this ActivityStreamsApplication) GetActivityStreamsDuration() vocab.Activi
 // otherwise.
 func (this ActivityStreamsApplication) GetActivityStreamsEndTime() vocab.ActivityStreamsEndTimeProperty {
 	return this.ActivityStreamsEndTime
+}
+
+// GetActivityStreamsEndpoints returns the "endpoints" property if it exists, and
+// nil otherwise.
+func (this ActivityStreamsApplication) GetActivityStreamsEndpoints() vocab.ActivityStreamsEndpointsProperty {
+	return this.ActivityStreamsEndpoints
 }
 
 // GetActivityStreamsFollowers returns the "followers" property if it exists, and
@@ -793,6 +807,7 @@ func (this ActivityStreamsApplication) JSONLDContext() map[string]string {
 	m = this.helperJSONLDContext(this.TootDiscoverable, m)
 	m = this.helperJSONLDContext(this.ActivityStreamsDuration, m)
 	m = this.helperJSONLDContext(this.ActivityStreamsEndTime, m)
+	m = this.helperJSONLDContext(this.ActivityStreamsEndpoints, m)
 	m = this.helperJSONLDContext(this.TootFeatured, m)
 	m = this.helperJSONLDContext(this.ActivityStreamsFollowers, m)
 	m = this.helperJSONLDContext(this.ActivityStreamsFollowing, m)
@@ -990,6 +1005,20 @@ func (this ActivityStreamsApplication) LessThan(o vocab.ActivityStreamsApplicati
 	} // Else: Both are nil
 	// Compare property "endTime"
 	if lhs, rhs := this.ActivityStreamsEndTime, o.GetActivityStreamsEndTime(); lhs != nil && rhs != nil {
+		if lhs.LessThan(rhs) {
+			return true
+		} else if rhs.LessThan(lhs) {
+			return false
+		}
+	} else if lhs == nil && rhs != nil {
+		// Nil is less than anything else
+		return true
+	} else if rhs != nil && rhs == nil {
+		// Anything else is greater than nil
+		return false
+	} // Else: Both are nil
+	// Compare property "endpoints"
+	if lhs, rhs := this.ActivityStreamsEndpoints, o.GetActivityStreamsEndpoints(); lhs != nil && rhs != nil {
 		if lhs.LessThan(rhs) {
 			return true
 		} else if rhs.LessThan(lhs) {
@@ -1583,6 +1612,14 @@ func (this ActivityStreamsApplication) Serialize() (map[string]interface{}, erro
 			m[this.ActivityStreamsEndTime.Name()] = i
 		}
 	}
+	// Maybe serialize property "endpoints"
+	if this.ActivityStreamsEndpoints != nil {
+		if i, err := this.ActivityStreamsEndpoints.Serialize(); err != nil {
+			return nil, err
+		} else if i != nil {
+			m[this.ActivityStreamsEndpoints.Name()] = i
+		}
+	}
 	// Maybe serialize property "featured"
 	if this.TootFeatured != nil {
 		if i, err := this.TootFeatured.Serialize(); err != nil {
@@ -1914,6 +1951,11 @@ func (this *ActivityStreamsApplication) SetActivityStreamsDuration(i vocab.Activ
 // SetActivityStreamsEndTime sets the "endTime" property.
 func (this *ActivityStreamsApplication) SetActivityStreamsEndTime(i vocab.ActivityStreamsEndTimeProperty) {
 	this.ActivityStreamsEndTime = i
+}
+
+// SetActivityStreamsEndpoints sets the "endpoints" property.
+func (this *ActivityStreamsApplication) SetActivityStreamsEndpoints(i vocab.ActivityStreamsEndpointsProperty) {
+	this.ActivityStreamsEndpoints = i
 }
 
 // SetActivityStreamsFollowers sets the "followers" property.
