@@ -11,10 +11,10 @@ import (
 // ActivityStreamsEndpointsProperty is the functional property "endpoints". It is
 // permitted to be a single nilable value type.
 type ActivityStreamsEndpointsProperty struct {
-	activitystreamsEndpointCollectionMember vocab.ActivityStreamsEndpointCollection
-	unknown                                 interface{}
-	iri                                     *url.URL
-	alias                                   string
+	activitystreamsEndpointsMember vocab.ActivityStreamsEndpoints
+	unknown                        interface{}
+	iri                            *url.URL
+	alias                          string
 }
 
 // DeserializeEndpointsProperty creates a "endpoints" property from an interface
@@ -45,10 +45,10 @@ func DeserializeEndpointsProperty(m map[string]interface{}, aliasMap map[string]
 			}
 		}
 		if m, ok := i.(map[string]interface{}); ok {
-			if v, err := mgr.DeserializeEndpointCollectionActivityStreams()(m, aliasMap); err == nil {
+			if v, err := mgr.DeserializeEndpointsActivityStreams()(m, aliasMap); err == nil {
 				this := &ActivityStreamsEndpointsProperty{
-					activitystreamsEndpointCollectionMember: v,
-					alias:                                   alias,
+					activitystreamsEndpointsMember: v,
+					alias:                          alias,
 				}
 				return this, nil
 			}
@@ -68,18 +68,17 @@ func NewActivityStreamsEndpointsProperty() *ActivityStreamsEndpointsProperty {
 }
 
 // Clear ensures no value of this property is set. Calling
-// IsActivityStreamsEndpointCollection afterwards will return false.
+// IsActivityStreamsEndpoints afterwards will return false.
 func (this *ActivityStreamsEndpointsProperty) Clear() {
 	this.unknown = nil
 	this.iri = nil
-	this.activitystreamsEndpointCollectionMember = nil
+	this.activitystreamsEndpointsMember = nil
 }
 
-// Get returns the value of this property. When
-// IsActivityStreamsEndpointCollection returns false, Get will return any
-// arbitrary value.
-func (this ActivityStreamsEndpointsProperty) Get() vocab.ActivityStreamsEndpointCollection {
-	return this.activitystreamsEndpointCollectionMember
+// Get returns the value of this property. When IsActivityStreamsEndpoints returns
+// false, Get will return any arbitrary value.
+func (this ActivityStreamsEndpointsProperty) Get() vocab.ActivityStreamsEndpoints {
+	return this.activitystreamsEndpointsMember
 }
 
 // GetIRI returns the IRI of this property. When IsIRI returns false, GetIRI will
@@ -91,7 +90,7 @@ func (this ActivityStreamsEndpointsProperty) GetIRI() *url.URL {
 // GetType returns the value in this property as a Type. Returns nil if the value
 // is not an ActivityStreams type, such as an IRI or another value.
 func (this ActivityStreamsEndpointsProperty) GetType() vocab.Type {
-	if this.IsActivityStreamsEndpointCollection() {
+	if this.IsActivityStreamsEndpoints() {
 		return this.Get()
 	}
 
@@ -100,13 +99,12 @@ func (this ActivityStreamsEndpointsProperty) GetType() vocab.Type {
 
 // HasAny returns true if the value or IRI is set.
 func (this ActivityStreamsEndpointsProperty) HasAny() bool {
-	return this.IsActivityStreamsEndpointCollection() || this.iri != nil
+	return this.IsActivityStreamsEndpoints() || this.iri != nil
 }
 
-// IsActivityStreamsEndpointCollection returns true if this property is set and
-// not an IRI.
-func (this ActivityStreamsEndpointsProperty) IsActivityStreamsEndpointCollection() bool {
-	return this.activitystreamsEndpointCollectionMember != nil
+// IsActivityStreamsEndpoints returns true if this property is set and not an IRI.
+func (this ActivityStreamsEndpointsProperty) IsActivityStreamsEndpoints() bool {
+	return this.activitystreamsEndpointsMember != nil
 }
 
 // IsIRI returns true if this property is an IRI.
@@ -120,7 +118,7 @@ func (this ActivityStreamsEndpointsProperty) IsIRI() bool {
 func (this ActivityStreamsEndpointsProperty) JSONLDContext() map[string]string {
 	m := map[string]string{"https://www.w3.org/ns/activitystreams": this.alias}
 	var child map[string]string
-	if this.IsActivityStreamsEndpointCollection() {
+	if this.IsActivityStreamsEndpoints() {
 		child = this.Get().JSONLDContext()
 	}
 	/*
@@ -138,7 +136,7 @@ func (this ActivityStreamsEndpointsProperty) JSONLDContext() map[string]string {
 // a leaky API detail only for folks looking to replace the go-fed
 // implementation. Applications should not use this method.
 func (this ActivityStreamsEndpointsProperty) KindIndex() int {
-	if this.IsActivityStreamsEndpointCollection() {
+	if this.IsActivityStreamsEndpoints() {
 		return 0
 	}
 	if this.IsIRI() {
@@ -163,13 +161,13 @@ func (this ActivityStreamsEndpointsProperty) LessThan(o vocab.ActivityStreamsEnd
 		return false
 	}
 	// LessThan comparison for the single value or unknown value.
-	if !this.IsActivityStreamsEndpointCollection() && !o.IsActivityStreamsEndpointCollection() {
+	if !this.IsActivityStreamsEndpoints() && !o.IsActivityStreamsEndpoints() {
 		// Both are unknowns.
 		return false
-	} else if this.IsActivityStreamsEndpointCollection() && !o.IsActivityStreamsEndpointCollection() {
+	} else if this.IsActivityStreamsEndpoints() && !o.IsActivityStreamsEndpoints() {
 		// Values are always greater than unknown values.
 		return false
-	} else if !this.IsActivityStreamsEndpointCollection() && o.IsActivityStreamsEndpointCollection() {
+	} else if !this.IsActivityStreamsEndpoints() && o.IsActivityStreamsEndpoints() {
 		// Unknowns are always less than known values.
 		return true
 	} else {
@@ -192,7 +190,7 @@ func (this ActivityStreamsEndpointsProperty) Name() string {
 // function as most typical use cases serialize types instead of individual
 // properties. It is exposed for alternatives to go-fed implementations to use.
 func (this ActivityStreamsEndpointsProperty) Serialize() (interface{}, error) {
-	if this.IsActivityStreamsEndpointCollection() {
+	if this.IsActivityStreamsEndpoints() {
 		return this.Get().Serialize()
 	} else if this.IsIRI() {
 		return this.iri.String(), nil
@@ -200,11 +198,11 @@ func (this ActivityStreamsEndpointsProperty) Serialize() (interface{}, error) {
 	return this.unknown, nil
 }
 
-// Set sets the value of this property. Calling
-// IsActivityStreamsEndpointCollection afterwards will return true.
-func (this *ActivityStreamsEndpointsProperty) Set(v vocab.ActivityStreamsEndpointCollection) {
+// Set sets the value of this property. Calling IsActivityStreamsEndpoints
+// afterwards will return true.
+func (this *ActivityStreamsEndpointsProperty) Set(v vocab.ActivityStreamsEndpoints) {
 	this.Clear()
-	this.activitystreamsEndpointCollectionMember = v
+	this.activitystreamsEndpointsMember = v
 }
 
 // SetIRI sets the value of this property. Calling IsIRI afterwards will return
@@ -217,7 +215,7 @@ func (this *ActivityStreamsEndpointsProperty) SetIRI(v *url.URL) {
 // SetType attempts to set the property for the arbitrary type. Returns an error
 // if it is not a valid type to set on this property.
 func (this *ActivityStreamsEndpointsProperty) SetType(t vocab.Type) error {
-	if v, ok := t.(vocab.ActivityStreamsEndpointCollection); ok {
+	if v, ok := t.(vocab.ActivityStreamsEndpoints); ok {
 		this.Set(v)
 		return nil
 	}

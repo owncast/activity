@@ -93,7 +93,7 @@ import (
 	typedelete "github.com/go-fed/activity/streams/impl/activitystreams/type_delete"
 	typedislike "github.com/go-fed/activity/streams/impl/activitystreams/type_dislike"
 	typedocument "github.com/go-fed/activity/streams/impl/activitystreams/type_document"
-	typeendpointcollection "github.com/go-fed/activity/streams/impl/activitystreams/type_endpointcollection"
+	typeendpoints "github.com/go-fed/activity/streams/impl/activitystreams/type_endpoints"
 	typeevent "github.com/go-fed/activity/streams/impl/activitystreams/type_event"
 	typeflag "github.com/go-fed/activity/streams/impl/activitystreams/type_flag"
 	typefollow "github.com/go-fed/activity/streams/impl/activitystreams/type_follow"
@@ -622,12 +622,12 @@ func (this Manager) DeserializeEndTimePropertyActivityStreams() func(map[string]
 	}
 }
 
-// DeserializeEndpointCollectionActivityStreams returns the deserialization method
-// for the "ActivityStreamsEndpointCollection" non-functional property in the
-// vocabulary "ActivityStreams"
-func (this Manager) DeserializeEndpointCollectionActivityStreams() func(map[string]interface{}, map[string]string) (vocab.ActivityStreamsEndpointCollection, error) {
-	return func(m map[string]interface{}, aliasMap map[string]string) (vocab.ActivityStreamsEndpointCollection, error) {
-		i, err := typeendpointcollection.DeserializeEndpointCollection(m, aliasMap)
+// DeserializeEndpointsActivityStreams returns the deserialization method for the
+// "ActivityStreamsEndpoints" non-functional property in the vocabulary
+// "ActivityStreams"
+func (this Manager) DeserializeEndpointsActivityStreams() func(map[string]interface{}, map[string]string) (vocab.ActivityStreamsEndpoints, error) {
+	return func(m map[string]interface{}, aliasMap map[string]string) (vocab.ActivityStreamsEndpoints, error) {
+		i, err := typeendpoints.DeserializeEndpoints(m, aliasMap)
 		if i == nil {
 			return nil, err
 		}

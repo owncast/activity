@@ -93,7 +93,7 @@ import (
 	typedelete "github.com/go-fed/activity/streams/impl/activitystreams/type_delete"
 	typedislike "github.com/go-fed/activity/streams/impl/activitystreams/type_dislike"
 	typedocument "github.com/go-fed/activity/streams/impl/activitystreams/type_document"
-	typeendpointcollection "github.com/go-fed/activity/streams/impl/activitystreams/type_endpointcollection"
+	typeendpoints "github.com/go-fed/activity/streams/impl/activitystreams/type_endpoints"
 	typeevent "github.com/go-fed/activity/streams/impl/activitystreams/type_event"
 	typeflag "github.com/go-fed/activity/streams/impl/activitystreams/type_flag"
 	typefollow "github.com/go-fed/activity/streams/impl/activitystreams/type_follow"
@@ -251,7 +251,7 @@ func init() {
 	typedelete.SetManager(mgr)
 	typedislike.SetManager(mgr)
 	typedocument.SetManager(mgr)
-	typeendpointcollection.SetManager(mgr)
+	typeendpoints.SetManager(mgr)
 	typeevent.SetManager(mgr)
 	typeflag.SetManager(mgr)
 	typefollow.SetManager(mgr)
@@ -319,7 +319,7 @@ func init() {
 	typedelete.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typedislike.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typedocument.SetTypePropertyConstructor(NewJSONLDTypeProperty)
-	typeendpointcollection.SetTypePropertyConstructor(NewJSONLDTypeProperty)
+	typeendpoints.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typeevent.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typeflag.SetTypePropertyConstructor(NewJSONLDTypeProperty)
 	typefollow.SetTypePropertyConstructor(NewJSONLDTypeProperty)

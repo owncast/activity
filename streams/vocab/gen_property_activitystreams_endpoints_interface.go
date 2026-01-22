@@ -10,12 +10,11 @@ import "net/url"
 // may be a link to a JSON-LD document with these properties.
 type ActivityStreamsEndpointsProperty interface {
 	// Clear ensures no value of this property is set. Calling
-	// IsActivityStreamsEndpointCollection afterwards will return false.
+	// IsActivityStreamsEndpoints afterwards will return false.
 	Clear()
-	// Get returns the value of this property. When
-	// IsActivityStreamsEndpointCollection returns false, Get will return
-	// any arbitrary value.
-	Get() ActivityStreamsEndpointCollection
+	// Get returns the value of this property. When IsActivityStreamsEndpoints
+	// returns false, Get will return any arbitrary value.
+	Get() ActivityStreamsEndpoints
 	// GetIRI returns the IRI of this property. When IsIRI returns false,
 	// GetIRI will return any arbitrary value.
 	GetIRI() *url.URL
@@ -25,9 +24,9 @@ type ActivityStreamsEndpointsProperty interface {
 	GetType() Type
 	// HasAny returns true if the value or IRI is set.
 	HasAny() bool
-	// IsActivityStreamsEndpointCollection returns true if this property is
-	// set and not an IRI.
-	IsActivityStreamsEndpointCollection() bool
+	// IsActivityStreamsEndpoints returns true if this property is set and not
+	// an IRI.
+	IsActivityStreamsEndpoints() bool
 	// IsIRI returns true if this property is an IRI.
 	IsIRI() bool
 	// JSONLDContext returns the JSONLD URIs required in the context string
@@ -52,9 +51,9 @@ type ActivityStreamsEndpointsProperty interface {
 	// instead of individual properties. It is exposed for alternatives to
 	// go-fed implementations to use.
 	Serialize() (interface{}, error)
-	// Set sets the value of this property. Calling
-	// IsActivityStreamsEndpointCollection afterwards will return true.
-	Set(v ActivityStreamsEndpointCollection)
+	// Set sets the value of this property. Calling IsActivityStreamsEndpoints
+	// afterwards will return true.
+	Set(v ActivityStreamsEndpoints)
 	// SetIRI sets the value of this property. Calling IsIRI afterwards will
 	// return true.
 	SetIRI(v *url.URL)
